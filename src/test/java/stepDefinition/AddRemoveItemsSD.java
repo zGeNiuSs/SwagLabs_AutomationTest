@@ -1,14 +1,20 @@
 package stepDefinition;
 
-import org.openqa.selenium.WebDriver;
-import pages.*;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.When;
+import org.junit.Assert;
+
+import static stepDefinition.PurchaseSingleItemSD.cart;
 
 public class AddRemoveItemsSD {
-    WebDriver driver = null;
+    @When("user remove product {string} from the cart")
+    public void removeProductFromCart(String productName) throws InterruptedException {
+        cart.removeProductFromCartScreen(productName).click();
+        Thread.sleep(1000);
+    }
 
-    Login login = null;
-    Products products = null;
-    Cart cart = null;
-    CheckoutInfo checkoutinfo = null;
-    CheckoutOverview checkoutoverview = null;
+    @And("Verify that product {string} is not appear in the cart")
+    public void productNotAppear(String productName) {
+        Assert.assertTrue("product "+productName+" is appear in the cart", cart.productIsNotDisplayed(productName));
+    }
 }

@@ -11,15 +11,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.*;
 
-public class PurchaseSingleItemSD {
-    WebDriver driver = null;
+import java.util.Arrays;
 
-    Login login = null;
-    Products products = null;
-    Cart cart = null;
-    CheckoutInfo checkoutinfo = null;
-    CheckoutOverview checkoutoverview = null;
-    CheckoutComplete checkoutcomplete = null;
+public class PurchaseSingleItemSD {
+    public static WebDriver driver = null;
+
+    public static Login login = null;
+    public static Products products = null;
+    public static Cart cart = null;
+    public static CheckoutInfo checkoutinfo = null;
+    public static CheckoutOverview checkoutoverview = null;
+    public static CheckoutComplete checkoutcomplete = null;
+
+    String[] option = {"Name (A to Z)",
+                        "Name (Z to A)",
+                        "Price (low to high)",
+                        "Price (high to low)"};
+
 
     @Given("the user is on the SwagLabs login page")
     public void loginPage(){
@@ -35,7 +43,7 @@ public class PurchaseSingleItemSD {
 
     @After
     public void closeBrowser() throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         driver.quit();
     }
 
@@ -61,16 +69,58 @@ public class PurchaseSingleItemSD {
 
     @And("user choose Name A to Z")
     public void chooseNameAToZSort(){
-        products.sortListNameAToZ().click();
+        products.sortList(Arrays.asList(option).indexOf("Name (A to Z)")).click();
     }
 
     @Then("Products are sorted from A to Z successfully")
     public void sortAToZStatusSuccessful(){
-        String first = products.firstProductName().getText();
-        String second = products.secondProductName().getText();
-        int res = first.compareTo(second); // When A < Z -> result is Negative Number
+        String first = products.productName(1).getText();
+        String second = products.productName(2).getText();
+        int res = first.compareTo(second); // When first < second -> result is Negative Number
         Assert.assertTrue(res<0);
-        Assert.assertEquals("Name (A to Z)", products.sortStatus().getText());
+        Assert.assertEquals(option[0], products.sortStatus().getText());
+    }
+
+    @And("user choose Name Z to A")
+    public void chooseNameZToASort(){
+        products.sortList(Arrays.asList(option).indexOf("Name (Z to A)")).click();
+    }
+
+    @Then("Products are sorted from Z to A successfully")
+    public void sortZToAStatusSuccessful(){
+        String first = products.productName(1).getText();
+        String second = products.productName(2).getText();
+        int res = first.compareTo(second); // When first > second -> result is Positive Number
+        Assert.assertTrue(res>=0);
+        Assert.assertEquals(option[1], products.sortStatus().getText());
+    }
+
+    @And("user choose Price low to high")
+    public void choosePriceLowToHighSort(){
+        products.sortList(Arrays.asList(option).indexOf("Price (low to high)")).click();
+    }
+
+    @Then("Products are sorted from low to high price successfully")
+    public void sortLowToHighStatusSuccessful(){
+        String first = products.productPrice(1).getText();
+        String second = products.productPrice(2).getText();
+        int res = first.compareTo(second); // When first < second -> result is Negative Number
+        Assert.assertTrue(res<0);
+        Assert.assertEquals(option[2], products.sortStatus().getText());
+    }
+
+    @And("user choose Price High to Low")
+    public void choosePriceHighToLowSort(){
+        products.sortList(Arrays.asList(option).indexOf("Price (high to low)")).click();
+    }
+
+    @Then("Products are sorted from High to Low price successfully")
+    public void sortHighToLowStatusSuccessful(){
+        String first = products.productPrice(1).getText();
+        String second = products.productPrice(2).getText();
+        int res = first.compareTo(second); // When first > second -> result is Positive Number
+        Assert.assertTrue(res>=0);
+        Assert.assertEquals(option[3], products.sortStatus().getText());
     }
 
     @When("user press on Add to cart button to add product {string} in cart")
@@ -83,9 +133,9 @@ public class PurchaseSingleItemSD {
         products.openCart().click();
     }
 
-    @Then("product {string} should appear in the cart page")
-    public void productIsAppear(String productName){
-        Assert.assertEquals(productName,cart.nameOfProduct());
+    @Then("product {string} should appear on the cart page")
+    public void productNameIsAppear(String productName){
+        Assert.assertEquals(productName,cart.nameOfProduct(1));
     }
 
     @When("user press on Checkout button")

@@ -1,14 +1,18 @@
 package stepDefinition;
 
+import io.cucumber.java.en.Then;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
-public class CheckoutPurchaseSD {
-    WebDriver driver = null;
+import static stepDefinition.PurchaseSingleItemSD.cart;
+import static stepDefinition.PurchaseSingleItemSD.checkoutinfo;
 
-    Login login = null;
-    Products products = null;
-    Cart cart = null;
-    CheckoutInfo checkoutinfo = null;
-    CheckoutOverview checkoutoverview = null;
+public class CheckoutPurchaseSD {
+
+    @Then("user should see an error message {string}")
+    public void errorMsgOnInfoScreen(String msg) {
+        Assert.assertEquals(msg, checkoutinfo.messageError().getText());
+    }
+
 }

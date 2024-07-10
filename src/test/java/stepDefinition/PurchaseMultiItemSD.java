@@ -1,15 +1,19 @@
 package stepDefinition;
 
+import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
-public class PurchaseMultiItemSD {
-    WebDriver driver = null;
+import static stepDefinition.PurchaseSingleItemSD.products;
 
-    Login login = null;
-    Products products = null;
-    Cart cart = null;
-    CheckoutInfo checkoutinfo = null;
-    CheckoutOverview checkoutoverview = null;
+public class PurchaseMultiItemSD {
+
+    @When("user press on Add to cart button to add same product {string} {int} times in cart")
+    public void addSameProductMoreThanOnce(String productName, int productCont) {
+        for (int i = 1; i <= productCont; i++) {
+            products.addProductToCart(productName).click();
+        }
+    }
 
 }
