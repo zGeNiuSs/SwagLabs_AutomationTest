@@ -52,6 +52,7 @@ These technologies are combined to create an effective testing framework that au
 
 ## Test Cases
 The test cases are written in the Gherkin syntax, which offers a clear representation of the test scenarios. Each test case covers various aspects of the Swag Labs website, ensuring comprehensive coverage.
+
 ![image](https://github.com/zGeNiuSs/SwagLabs_AutomationTest/assets/72147140/8f5e9cd7-e4b0-4cc9-b845-49cc02921f92)
 
 
