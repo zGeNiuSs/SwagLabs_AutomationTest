@@ -1,6 +1,6 @@
 # Test Automation for Swag Labs
 
-🛠 Automated testing for Swag Labs web with test cases and bug reports
+🛠 Automated testing for Swag Labs website
 
 📢 This repository contains an automated testing project for Swag Labs using Java, Cucumber, BDD, Selenium, Gherkin, ChromeDriver, JUnit 4, Maven, and IntelliJ IDEA. The tests are designed to cover various scenarios on the Sauce Demo website (https://www.saucedemo.com).
 
@@ -12,18 +12,23 @@
 - [Test Cases](#test-cases)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
+
 
 ## Introduction
 Test automation is the process of using software tools and frameworks to automate test execution, compare actual outcomes to expected outcomes, and generate test reports. This helps to increase efficiency, accuracy, and repeatability of testing processes, as well as reducing the time and costs associated with manual testing.
 
 In this project, we are going to test SWAG Labs (Sauce Demo - https://www.saucedemo.com). We are going to use tools and frameworks like Cucumber BDD (Behavior-driven development) with Selenium for the automation. This project focuses on automating tests for the Swag Labs website using Cucumber BDD and Selenium.
 
+Sure, here's an improved version of the scope section without using the terms "negative" or "happy" scenarios:
+
+---
+
 ## Scope
 The project covers the following areas of the Swag Labs website:
-- Login page for all accepted users and error scenarios.
-- Product page, including sorting features and product detailed view.
-- Your cart page for all accepted users.
+- **Login Page**: Testing for all accepted users and error scenarios.
+- **Product Page**: Including sorting features, product detailed view, and verifying the accuracy of product images.
+- **Cart Page**: Testing functionalities for adding and removing items, and ensuring the cart behaves as expected.
+- **Checkout Process**: Ensuring the checkout process works correctly, including handling various user inputs and scenarios.
 
 ## Features
 - Utilizes Cucumber for behavior-driven development (BDD) to write tests in a human-readable format.
@@ -65,5 +70,4 @@ Note: Make sure to download the relevant ChromeDriver version for your Chrome br
 3. Locate the runner file with the `.java` extension.
 4. Run the test files using JUnit to execute the automated test scenarios.
 
-## Contributing
-Contributions to this project are welcome! If you identify any issues or wish to enhance the existing test suite, please feel free to create pull requests.
+
